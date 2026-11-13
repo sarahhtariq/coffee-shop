@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Coffee Planet</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#FBF8F3; --ink:#2B1B14; --muted:#7A6558; --line:#E6DCCF;
+  --hero:#2B1B14; --hero-ink:#F2B35A; --accent:#C8742B; --accent-ink:#2B1B14; --card:#F3EBDF;
+  --head:"Bricolage Grotesque","Trebuchet MS",Arial,sans-serif;
+  --body:"DM Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){--bg:#1B120D;--ink:#F3E9DC;--muted:#BDA895;--line:#3A2A20;--hero:#2B1B14;--card:#261912;}
+}
+:root[data-theme="dark"]{--bg:#1B120D;--ink:#F3E9DC;--muted:#BDA895;--line:#3A2A20;--hero:#2B1B14;--card:#261912;}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.6}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+.wrap{max-width:1040px;margin:0 auto;padding:0 24px}
+
+header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--hero);color:#EADFD2}
+header.top .wrap{display:flex;align-items:center;justify-content:space-between;height:60px}
+.logo{font-family:var(--head);font-weight:800;font-size:22px;text-decoration:none;color:var(--hero-ink)}
+nav a{margin-left:22px;text-decoration:none;font-weight:500;font-size:15px;color:#EADFD2}
+nav a:hover{color:var(--hero-ink)}
+
+.hero{background:var(--hero);color:var(--hero-ink);padding:64px 0 0;overflow:hidden;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='400' viewBox='0 0 600 400' fill='none' stroke='%23F2B35A' stroke-opacity='.13' stroke-width='1.5'%3E%3Cpath d='M0 300C120 240 200 340 320 290S520 220 600 270'/%3E%3Cpath d='M0 260C120 200 200 300 320 250S520 180 600 230'/%3E%3Cpath d='M0 220C120 160 200 260 320 210S520 140 600 190'/%3E%3Cpath d='M0 180C120 120 200 220 320 170S520 100 600 150'/%3E%3C/svg%3E");background-size:600px 400px;background-position:left bottom;background-repeat:repeat-x}
+.hero h1{font-family:var(--head);font-weight:800;font-size:clamp(46px,8.5vw,108px);line-height:.9;letter-spacing:-.03em;margin:0;max-width:11ch}
+.hero-row{display:flex;flex-wrap:wrap;gap:28px;align-items:flex-end;justify-content:space-between;padding:36px 0 24px}
+.hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:24px;align-items:center}
+.hero-art svg{display:block;width:100%;height:auto;max-width:480px;margin:0 auto;filter:drop-shadow(0 18px 24px rgba(138,31,84,.18))}
+.wave{display:block;width:100%;height:50px}
+@media (max-width:860px){.hero-grid{grid-template-columns:1fr}.hero-art{padding-bottom:8px}.hero-art svg{max-width:340px}}
+.hero p{margin:0;max-width:34ch;color:#EADFD2;font-size:19px}
+.btns{display:flex;gap:12px;flex-wrap:wrap}
+.btn{display:inline-block;padding:14px 24px;border-radius:999px;font-weight:500;text-decoration:none;background:var(--hero-ink);color:#2B1B14}
+.btn.alt{background:transparent;color:var(--hero-ink);border:2px solid var(--hero-ink)}
+.btn:hover{transform:translateY(-2px)}
+.steam{display:flex;gap:10px;height:46px;align-items:flex-end;margin-bottom:18px}
+.steam i{width:6px;height:36px;border-radius:6px;background:var(--hero-ink);opacity:.0;animation:rise 3.2s ease-in-out infinite}
+.steam i:nth-child(2){animation-delay:.6s;height:44px}.steam i:nth-child(3){animation-delay:1.2s}
+@keyframes rise{0%{opacity:0;transform:translateY(14px)}40%{opacity:.8}100%{opacity:0;transform:translateY(-14px)}}
+
+section{padding:80px 0}
+h2{font-family:var(--head);font-weight:800;font-size:clamp(34px,6vw,56px);line-height:1;letter-spacing:-.02em;margin:0 0 14px}
+.lede{color:var(--muted);max-width:52ch;margin:0 0 36px}
+
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px}
+.tabs button{font:inherit;font-weight:500;padding:10px 20px;border-radius:999px;border:2px solid var(--ink);background:transparent;color:var(--ink);cursor:pointer}
+.tabs button[aria-selected="true"]{background:var(--ink);color:var(--bg)}
+.menu{list-style:none;margin:0;padding:0;border-top:2px solid var(--ink)}
+.menu li{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 0;border-bottom:1px solid var(--line)}
+.menu li>div:nth-child(2){flex:1}
+.thumb{width:72px;height:72px;border-radius:16px;background:#F1DEC7;flex:none;display:grid;place-items:center}
+@media (max-width:760px){.thumb{width:60px;height:60px}.thumb svg{width:46px;height:46px}}
+.menu b{font-family:var(--head);font-size:22px;font-weight:500;display:block}
+.menu span{color:var(--muted);font-size:15px}
+.menu .price{font-family:var(--head);font-size:22px;white-space:nowrap}
+.menu .price small{font-family:var(--body);font-size:14px;color:var(--muted)}
+
+.story{background:var(--card)}
+.story .grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
+.facts{display:grid;gap:18px}
+.facts div{padding-left:18px;border-left:6px solid var(--accent)}
+.facts strong{font-family:var(--head);font-size:20px;display:block}
+
+.visit .grid{display:grid;grid-template-columns:1fr 1fr;gap:48px}
+.status{display:inline-flex;align-items:center;gap:10px;font-weight:500;margin-bottom:20px}
+.dot{width:12px;height:12px;border-radius:50%;background:#999}
+.dot.on{background:#2FA66A}
+table{border-collapse:collapse;width:100%}
+td{padding:10px 0;border-bottom:1px solid var(--line)}
+td:not(:first-child),th:not(:first-child){text-align:right}
+th{text-align:left;padding:10px 0;border-bottom:2px solid var(--ink);font-weight:500;color:var(--muted);font-size:15px}
+tr.today td{font-weight:500}
+.gallery .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:24px}
+.gallery figure{margin:0}
+.gallery svg{display:block;width:100%;height:auto;border-radius:18px}
+.gallery figcaption{margin-top:10px;font-family:var(--head);font-size:20px}
+.reviews{background:var(--card)}
+.reviews .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:36px}
+.reviews blockquote{margin:0;padding-top:16px;border-top:2px solid var(--ink)}
+.stars{color:#B8601A;letter-spacing:2px;font-size:20px}
+.reviews p{margin:8px 0 14px;font-size:18px}
+.reviews cite{font-style:normal;font-weight:500}
+@media (max-width:760px){nav a{font-size:14px}header.top .wrap{height:auto;min-height:60px;flex-wrap:wrap;padding-top:8px;padding-bottom:8px;row-gap:2px}.logo{font-size:20px}header.top nav a{margin:0 14px 0 0}}
+svg [fill="#F9C9DB"]{fill:#EAD7BE}svg [stroke="#F9C9DB"]{stroke:#EAD7BE}
+svg [fill="#FFE6EE"]{fill:#E8D3B8}svg [fill="#FBD9E5"]{fill:#F1DEC7}
+svg [stroke="#F4BCD0"]{stroke:#D9BE9C}svg [stroke="#F9DCE7"]{stroke:#EBD9C2}
+svg [fill="#FFF7FA"],svg [fill="#FFF1F6"]{fill:#FFF8EC}svg [stroke="#FFF7FA"]{stroke:#FFF8EC}
+svg [stroke="#E88FB0"]{stroke:#C8742B}
+svg [fill="#8A1F54"]{fill:#4A2A1C}svg [stroke="#8A1F54"]{stroke:#4A2A1C}
+footer{background:var(--hero);color:#EADFD2;padding:36px 0;font-size:15px}
+footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+
+@media (max-width:760px){
+  .story .grid,.visit .grid{grid-template-columns:1fr;gap:32px}
+  nav a{margin-left:14px}
+  section{padding:56px 0}
+}
+@media (prefers-reduced-motion:reduce){.steam i{animation:none;opacity:.6}.btn:hover{transform:none}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <a class="logo" href="#top"><svg viewBox='0 0 32 32' width='28' height='28' aria-hidden='true' style='vertical-align:-6px;margin-right:8px'><ellipse cx='16' cy='16' rx='15' ry='5' transform='rotate(-20 16 16)' fill='none' stroke='currentColor' stroke-width='2'/><circle cx='16' cy='16' r='9' fill='currentColor'/><path d='M11 9c7 3-2 8 6 14' fill='none' stroke='#2B1B14' stroke-width='2' stroke-linecap='round'/><path d='M3 21c4 4 14 1 24-8' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round'/></svg>Coffee Planet</a>
+  <nav><a href="#menu">Menu</a><a href="#story">Story</a><a href="#reviews">Reviews</a><a href="#visit">Visit</a></nav>
+</div></header>
+
+<main id="top">
+<div class="hero"><div class="wrap hero-grid"><div class="hero-text">
+  <div class="steam" aria-hidden="true"><i></i><i></i><i></i></div>
+  <h1>Good coffee, slowly made.</h1>
+  <div class="hero-row">
+    <p>Espresso, lattes, cold drinks and fresh sandwiches in a bright corner shop. Stay a while.</p>
+    <div class="btns"><a class="btn" href="#menu">See the menu</a><a class="btn alt" href="#visit">Find us</a></div>
+  </div>
+</div>
+<div class="hero-art">
+<svg viewBox="0 0 480 480" role="img" aria-label="Illustration of a latte with heart art on a saucer, surrounded by coffee beans and a cookie"><defs><g id="hbean"><ellipse rx="26" ry="38" fill="#5B3523"/><path d="M0-34C-10-10 10 10 0 34" fill="none" stroke="#F9C9DB" stroke-width="3" stroke-linecap="round"/></g><path id="ht" d="M0 50C-60 10-50-40-22-40C-8-40 0-30 0-22C0-30 8-40 22-40C50-40 60 10 0 50Z"/></defs><circle cx="240" cy="240" r="228" fill="#FFE6EE"/><circle cx="246" cy="250" r="185" fill="#8A1F54" fill-opacity=".12"/><circle cx="240" cy="240" r="185" fill="#fff" stroke="#F4BCD0" stroke-width="3"/><circle cx="240" cy="240" r="150" fill="none" stroke="#F9DCE7" stroke-width="2"/><path d="M366 218h30a26 26 0 0 1 0 52h-30" fill="none" stroke="#E88FB0" stroke-width="24" stroke-linecap="round"/><path d="M366 218h30a26 26 0 0 1 0 52h-30" fill="none" stroke="#FFF7FA" stroke-width="18" stroke-linecap="round"/><circle cx="240" cy="240" r="128" fill="#FFF7FA" stroke="#E88FB0" stroke-width="3"/><circle cx="240" cy="240" r="104" fill="#7A4A32" stroke="#5B3523" stroke-width="4"/><g transform="translate(240 236) scale(1.3)"><use href="#ht" fill="#F6E3D3"/><use href="#ht" transform="scale(.72)" fill="#7A4A32"/><use href="#ht" transform="scale(.46)" fill="#F6E3D3"/><use href="#ht" transform="scale(.2)" fill="#7A4A32"/></g><g fill="#F6E3D3" fill-opacity=".25"><ellipse cx="200" cy="180" rx="26" ry="8" transform="rotate(-30 200 180)"/></g><use href="#hbean" transform="translate(62 98) rotate(-30) scale(.8)"/><use href="#hbean" transform="translate(432 84) rotate(25) scale(.8)"/><use href="#hbean" transform="translate(58 336) rotate(65) scale(.8)"/><use href="#hbean" transform="translate(236 458) rotate(10) scale(.7)"/><use href="#hbean" transform="translate(120 54) rotate(50) scale(.55)"/><g transform="translate(402 402)"><circle r="44" fill="#8A1F54" fill-opacity=".14" cx="4" cy="6"/><circle r="44" fill="#E3B98A" stroke="#C99A66" stroke-width="3"/><g fill="#5B3523"><circle cx="-14" cy="-12" r="6"/><circle cx="12" cy="-18" r="5"/><circle cx="16" cy="8" r="6"/><circle cx="-8" cy="14" r="5"/><circle cx="-22" cy="6" r="4"/></g></g></svg>
+</div>
+</div>
+<svg class="wave" viewBox="0 0 1440 50" preserveAspectRatio="none" aria-hidden="true"><path d="M0 30C240 0 480 0 720 22S1200 50 1440 14V50H0Z" fill="var(--bg)"/></svg></div>
+
+<section id="menu"><div class="wrap">
+  <h2>Menu</h2>
+  <p class="lede">Prices are in rupees. Prices marked "from" start at the smallest size.</p>
+  <div class="tabs" role="tablist" aria-label="Menu categories"></div>
+  <ul class="menu" id="menuList"></ul>
+</div></section>
+
+<section class="story" id="story"><div class="wrap grid">
+  <div>
+    <svg viewBox='0 0 200 110' width='200' height='110' role='img' aria-label='Illustration of a planet made of a coffee bean with a ring of beans' style='display:block;margin-bottom:12px'><ellipse cx='100' cy='58' rx='92' ry='22' transform='rotate(-14 100 58)' fill='none' stroke='#C8742B' stroke-width='4'/><circle cx='100' cy='55' r='38' fill='#5B3523'/><path d='M84 24c22 12-8 28 14 52' fill='none' stroke='#EAD7BE' stroke-width='5' stroke-linecap='round'/><path d='M12 76c30 20 120 4 176-34' fill='none' stroke='#C8742B' stroke-width='4' stroke-linecap='round'/><g fill='#F2B35A'><circle cx='30' cy='30' r='3'/><circle cx='176' cy='18' r='2.5'/><circle cx='170' cy='92' r='2'/></g></svg>
+    <h2>Everyone's cup of specialty.</h2>
+    <p class="lede" style="margin-bottom:0">Coffee Planet began in the UAE in 2005 with a simple idea: specialty coffee should be for everyone. Our Mandi Bahauddin cafe serves espresso drinks, iced coffees, teas, sandwiches and sweets in relaxed spaces made for long conversations.</p>
+  </div>
+  <div class="facts">
+    <div><strong>Born in the UAE, 2005</strong>A specialty coffee brand, now with cafes in Pakistan.</div>
+    <div><strong>Open until midnight</strong>Open every day from 9am.</div>
+    <div><strong>Dine in, take away or delivery</strong>Order however suits your day.</div>
+  </div>
+</div></section>
+
+<section class="gallery" id="gallery"><div class="wrap">
+  <h2>From the bar</h2>
+  <p class="lede">A few things we pour every day.</p>
+  <div class="grid">
+    <figure>
+      <svg viewBox="0 0 200 200" role="img" aria-label="Illustration of a latte with heart latte art"><rect width="200" height="200" fill="#F9C9DB"/><path d="M160 88h14a12 12 0 0 1 0 24h-14" fill="none" stroke="#fff" stroke-width="8"/><circle cx="100" cy="100" r="78" fill="#fff"/><circle cx="100" cy="100" r="62" fill="#FFF1F6" stroke="#E88FB0" stroke-width="3"/><circle cx="100" cy="100" r="50" fill="#7A4A32"/><path d="M100 128C70 106 74 80 92 80c6 0 8 6 8 6s2-6 8-6c18 0 22 26-8 48z" fill="#F6E3D3"/></svg>
+      <figcaption>Latte</figcaption>
+    </figure>
+    <figure>
+      <svg viewBox="0 0 200 200" role="img" aria-label="Illustration of an iced coffee with a straw"><rect width="200" height="200" fill="#FBD9E5"/><path d="M64 90h72l-7 80a6 6 0 0 1-6 5H78a6 6 0 0 1-6-5z" fill="#7A4A32"/><path d="M62 76h76l-2 14H64z" fill="#F6E3D3"/><path d="M60 40h80l-10 130a8 8 0 0 1-8 7H78a8 8 0 0 1-8-7z" fill="#fff" fill-opacity=".45" stroke="#8A1F54" stroke-width="3"/><g fill="#fff" fill-opacity=".85"><rect x="76" y="110" width="24" height="24" rx="4" transform="rotate(-12 88 122)"/><rect x="102" y="132" width="22" height="22" rx="4" transform="rotate(14 113 143)"/><rect x="98" y="96" width="20" height="20" rx="4" transform="rotate(8 108 106)"/></g><path d="M120 14l-10 100" stroke="#E88FB0" stroke-width="7" stroke-linecap="round"/></svg>
+      <figcaption>Iced latte</figcaption>
+    </figure>
+    <figure>
+      <svg viewBox="0 0 200 200" role="img" aria-label="Illustration of roasted coffee beans"><defs><g id="bean"><ellipse rx="26" ry="38" fill="#5B3523"/><path d="M0-34C-10-10 10 10 0 34" fill="none" stroke="#F9C9DB" stroke-width="3" stroke-linecap="round"/></g></defs><rect width="200" height="200" fill="#F9C9DB"/><use href="#bean" transform="translate(58 66) rotate(-30) scale(.8)"/><use href="#bean" transform="translate(138 58) rotate(20) scale(.8)"/><use href="#bean" transform="translate(98 122) rotate(70) scale(.8)"/><use href="#bean" transform="translate(44 150) rotate(10) scale(.8)"/><use href="#bean" transform="translate(156 144) rotate(-50) scale(.8)"/></svg>
+      <figcaption>Fresh roasted beans</figcaption>
+    </figure>
+  </div>
+</div></section>
+
+<section class="reviews" id="reviews"><div class="wrap">
+  <h2>What our guests say</h2>
+  <p class="lede">Sample reviews. Replace with real ones from your customers.</p>
+  <div class="grid">
+    <blockquote><div class="stars" role="img" aria-label="5 out of 5 stars">★★★★★</div><p>The caramel latte is the best I've had in years. Smooth, never bitter, and the staff remember my order.</p><cite>Ayesha K.</cite></blockquote>
+    <blockquote><div class="stars" role="img" aria-label="5 out of 5 stars">★★★★★</div><p>I come here to work most mornings. Bright room, fast wifi and a chicken croissant that disappears quickly.</p><cite>Hamza R.</cite></blockquote>
+    <blockquote><div class="stars" role="img" aria-label="4 out of 5 stars">★★★★☆</div><p>Their iced Spanish latte is perfect on a hot afternoon. Wish they stayed open a little later on weekdays.</p><cite>Sana M.</cite></blockquote>
+  </div>
+</div></section>
+
+<section class="visit" id="visit"><div class="wrap grid">
+  <div>
+    <h2>Visit us</h2>
+    
+    <div class="status"><span class="dot" id="dot"></span><span id="statusText">Checking hours…</span></div>
+    <p class="lede" style="margin-bottom:12px">Mandi Bahauddin, Punjab<br>Full address and phone number coming soon<br>Instagram: @mycoffeeplanet</p>
+    <svg viewBox='0 0 280 150' role='img' aria-label='Illustration of the Coffee Planet cafe front' style='width:100%;max-width:320px;height:auto;border-radius:16px;display:block'><rect width='280' height='150' fill='#EAD7BE'/><rect x='30' y='40' width='220' height='100' fill='#2B1B14'/><path d='M20 40h240l-14-26H34z' fill='#C8742B'/><path d='M60 14l-6 26h24l2-26zM120 14l-2 26h24l-2-26zM180 14l2 26h24l6-26z' fill='#FFF8EC'/><rect x='90' y='50' width='100' height='20' rx='4' fill='#F2B35A'/><text x='140' y='64' text-anchor='middle' font-size='12' font-weight='700' fill='#2B1B14'>Coffee Planet</text><rect x='124' y='86' width='32' height='54' rx='3' fill='#C8742B'/><rect x='44' y='84' width='64' height='42' rx='4' fill='#F1DEC7'/><rect x='172' y='84' width='64' height='42' rx='4' fill='#F1DEC7'/><path d='M62 118h20l-2 -12H64zM190 118h20l-2 -12h-16z' fill='#fff' stroke='#4A2A1C' stroke-width='2'/><rect x='0' y='140' width='280' height='10' fill='#D9BE9C'/></svg>
+  </div>
+  <div>
+    <table id="hours"></table>
+  </div>
+</div></section>
+</main>
+
+<footer><div class="wrap"><span>&copy; 2026 Coffee Planet</span><span>Roasted and poured with care.</span></div></footer>
+
+<script>
+const MENU={
+ Espresso:[['Espresso','Strong, concentrated shot',450,1],['Ristretto','Short, rich shot in a small cup',450,1],['Espresso macchiato','Espresso marked with creamy foam',450,1],['Espresso con panna','Espresso topped with whipped cream',450,1]],
+ 'Hot coffee':[['Cappuccino','',645,1],['Cafe latte','',645],['French vanilla latte','',675,1],['Caramel latte','',675,1],['Hazelnut latte','',675,1],['Irish latte','',675,1],['Spanish latte','',795],['Americano','',495,1],['Hazelnut americano','',695],['Long black','',495],['Cafe mocha','Espresso, steamed milk and chocolate, topped with whipped cream',675,1]],
+ 'Hot chocolate & tea':[['Hot chocolate','Melted chocolate and steamed milk, topped with whipped cream',675,1],['Cardamom tea','',395],['Chamomile tea','',395],['Jasmine green tea','',395],['Lipton tea','Karak chai cup',395],['Mixed tea','',395]],
+ 'Iced coffee':[['White chocolate caramel iced coffee','Blended, with white chocolate and caramel',999],['Mochaccino iced coffee','Blended coffee and chocolate with whipped cream and cocoa',999],['Very vanilla iced coffee','Blended coffee with rich vanilla',999],['Iced americano','',666],['Iced cafe latte','Chilled coffee with milk over ice',699],['Iced caramel','Chilled coffee topped with caramel',777],['Iced cafe mocha','Chilled coffee, chocolate and milk, with whipped cream',777],['Iced cafe hazelnut','',777],['Iced cafe vanilla','',777],['Iced Spanish latte','Creamy chilled coffee with a hint of sweetness',777],['Iced cafe Irish','Chilled coffee with Irish cream flavor',777]],
+ 'Frappes & chillers':[['Cookies & cream frappe','Cookies and ice with whipped cream and chocolate drizzle',999],['Chocolate iced frappe','',999],['Wildberry chiller','',999],['Strawberry chiller','',999],['Mango chiller','',999],['Peach chiller','',999],['Mixed berry chiller','',999]],
+ 'Smoothies & iced tea':[['Peach iced tea','',595],['Green apple iced tea','',595],['Strawberry smoothie','Fruit, yogurt and ice',1050],['Mango smoothie','Fruit, yogurt and ice',1050],['Peach smoothie','Fruit, yogurt and ice',1050],['Wildberry smoothie','Fruit, yogurt and ice',1050],['Mixed berry smoothie','Fruit, yogurt and ice',1050]],
+ 'Sodas & water':[['Green apple soda','',666],['Blue ocean soda','',666],['Lime mint mojito','',666],['Virgin mojito','Mint, lime, soda and ice',666],['Passion fruit mojito','',777],['Blueberry mojito','Blueberry, fresh mint and soda',666],['Water, 500 ml','',60]],
+ 'Sandwiches & wraps':[['BBQ sandwich','Savory meat piled between bread with tangy sauce and crunchy slaw',755],['Club sandwich','Layered turkey, lettuce, tomato and mayonnaise on toasted bread',855],['Chicken wrap','Chicken wrapped in flatbread',620],['Kabab wrap','Grilled meat in flatbread with fresh vegetables and sauces',650]],
+ 'Turnovers':[['Chicken mushroom lasagna','Layers of pasta, chicken, mushrooms and cheese baked in a savory sauce',899],['Mini pizza','Savory pastry filled with cheese and toppings, baked until golden and crisp',450]],
+ 'Cakes & brownies':[['Cadbury cupcake','Chocolate cupcake with creamy frosting',450],['Nutella cupcake','Chocolate cupcake with hazelnut spread',495],['Butterscotch cupcake','Butterscotch frosting with caramel drizzle',375],['Nutella brownie','Fudgy chocolate brownie with a hazelnut swirl',395]]
+};
+const S='#4A2A1C',W='#FFF8EC';
+const COL=[[/white/i,'#E9D2A6'],[/mango/i,'#F6B73C'],[/strawberry/i,'#E8577A'],[/peach/i,'#F5A97A'],[/blue/i,'#3E8EDE'],[/berry/i,'#7B3FA0'],[/green apple/i,'#8CC63F'],[/lime|mojito|mint/i,'#7FCB6B'],[/passion/i,'#F2A23A'],[/chocolate|mocha|cookies|brownie|cadbury/i,'#5B3523'],[/caramel|butterscotch|lipton|mixed tea|cardamom/i,'#C8853B'],[/vanilla/i,'#E8D2A6'],[/hazelnut|nutella|irish/i,'#A8744A'],[/chamomile/i,'#F0D77A'],[/jasmine/i,'#A9C97A'],[/spanish/i,'#B98B5E']];
+const col=n=>(COL.find(([r])=>r.test(n))||[0,'#7A4A32'])[1];
+const glass=(c,o={})=>`<path d='M18 14h28l-4 40H22z' fill='${c}' fill-opacity='${o.thick?1:.85}' stroke='${S}' stroke-width='2.5' stroke-linejoin='round'/>`+(o.cream?`<path d='M19 14c-2-9 26-9 26 0z' fill='#fff' stroke='${S}' stroke-width='2'/>`:'')+(o.ice?`<rect x='24' y='24' width='10' height='10' rx='2' fill='#fff' fill-opacity='.7' transform='rotate(-12 29 29)'/><rect x='33' y='34' width='9' height='9' rx='2' fill='#fff' fill-opacity='.7' transform='rotate(10 37 38)'/>`:'')+(o.fizz?`<circle cx='28' cy='30' r='2' fill='#fff'/><circle cx='36' cy='38' r='2.5' fill='#fff'/><circle cx='31' cy='46' r='2' fill='#fff'/>`:'')+(o.leaf?`<path d='M40 14c4-6 10-6 12-4-3 3-7 6-12 4z' fill='#4FA85A'/>`:'')+`<path d='M38 6l-6 26' stroke='#C8742B' stroke-width='4' stroke-linecap='round'/>`;
+const cup=(c,o={})=>`<ellipse cx='30' cy='54' rx='24' ry='4' fill='#D9BE9C'/><path d='M46 26h3a7 7 0 0 1 0 14h-4' fill='none' stroke='${S}' stroke-width='2.5'/><path d='M12 24h34v12a15 15 0 0 1-15 15h-4a15 15 0 0 1-15-15z' fill='${W}' stroke='${S}' stroke-width='2.5'/><ellipse cx='29' cy='24' rx='17' ry='4.5' fill='${c}' stroke='${S}' stroke-width='2'/>`+(o.cream?`<ellipse cx='29' cy='21' rx='9' ry='4' fill='#fff'/>`:'')+(o.foam?`<ellipse cx='29' cy='24' rx='9' ry='2.5' fill='#F6E3D3'/>`:'')+(o.bag?`<path d='M27 24l-3-14' stroke='${S}' stroke-width='2'/><rect x='20' y='6' width='8' height='6' fill='#fff' stroke='${S}' stroke-width='1.5'/>`:`<path d='M24 16c-3-4 3-6 0-10M33 16c-3-4 3-6 0-10' fill='none' stroke='#B89A80' stroke-width='2' stroke-linecap='round'/>`);
+const sand=()=>`<rect x='8' y='42' width='48' height='9' rx='4' fill='#E3B98A' stroke='${S}' stroke-width='2.5'/><path d='M8 38c4 5 8-3 12 2s8-3 12 2 8-3 12 2 8-3 12 0v-4H8z' fill='#6FB559'/><rect x='10' y='30' width='44' height='8' rx='3' fill='#B5543A' stroke='${S}' stroke-width='2'/><path d='M8 30c0-14 48-14 48 0z' fill='#E3B98A' stroke='${S}' stroke-width='2.5'/><circle cx='24' cy='22' r='1.5' fill='${W}'/><circle cx='34' cy='19' r='1.5' fill='${W}'/><circle cx='43' cy='23' r='1.5' fill='${W}'/>`;
+const wrap=()=>`<g transform='rotate(-25 32 32)'><rect x='8' y='20' width='48' height='24' rx='12' fill='#E3B98A' stroke='${S}' stroke-width='2.5'/><circle cx='48' cy='32' r='8' fill='#6FB559'/><circle cx='48' cy='32' r='4' fill='#B5543A'/><path d='M14 26h20M14 32h24M14 38h18' stroke='#C99A66' stroke-width='2' stroke-linecap='round'/></g>`;
+const pizza=()=>`<circle cx='32' cy='32' r='22' fill='#E3B98A' stroke='${S}' stroke-width='2.5'/><circle cx='32' cy='32' r='17' fill='#F2B35A'/><g fill='#B5543A'><circle cx='26' cy='26' r='4'/><circle cx='39' cy='29' r='4'/><circle cx='30' cy='39' r='4'/></g><circle cx='38' cy='40' r='2' fill='#6FB559'/>`;
+const lasa=()=>`<path d='M10 22h44v26H10z' fill='#F2B35A' stroke='${S}' stroke-width='2.5' stroke-linejoin='round'/><rect x='10' y='30' width='44' height='8' fill='#B5543A'/><path d='M10 30h44M10 38h44' stroke='${S}' stroke-width='2'/><path d='M10 22c4-6 10 0 14-4s10 2 14-2 12 4 16 4v4H10z' fill='#FFF3C9' stroke='${S}' stroke-width='2'/>`;
+const cake=c=>`<path d='M14 34h36l-5 20H19z' fill='#C8742B' stroke='${S}' stroke-width='2.5' stroke-linejoin='round'/><path d='M16 34c-2-8 6-10 8-14 2-8 14-8 16 0 2 4 10 6 8 14z' fill='${c}' stroke='${S}' stroke-width='2.5'/><circle cx='32' cy='11' r='4' fill='#D63C4F'/>`;
+const brown=()=>`<rect x='12' y='24' width='40' height='28' rx='4' fill='#5B3523' stroke='${S}' stroke-width='2.5'/><path d='M12 32c6 4 10-4 16 0s10-4 16 0 6 0 8 0v-4a4 4 0 0 0-4-4H16a4 4 0 0 0-4 4z' fill='#A8744A'/><circle cx='24' cy='42' r='3' fill='#7A4A32'/><circle cx='38' cy='44' r='3' fill='#7A4A32'/>`;
+const bottle=()=>`<rect x='24' y='6' width='16' height='8' rx='2' fill='#3E8EDE'/><path d='M22 14h20l2 8v32a4 4 0 0 1-4 4H24a4 4 0 0 1-4-4V22z' fill='#CFE8FA' stroke='${S}' stroke-width='2.5' stroke-linejoin='round'/><path d='M21 34h22' stroke='#3E8EDE' stroke-width='3'/>`;
+function art(cat,n){const c=col(n);let g;
+ if(cat==='Espresso')g=cup('#3A2216',{cream:/panna/i.test(n),foam:/macchiato/i.test(n)});
+ else if(cat==='Hot coffee')g=cup(c,{foam:1});
+ else if(cat==='Hot chocolate & tea')g=/tea/i.test(n)?cup(c,{bag:1}):cup('#5B3523',{cream:1});
+ else if(cat==='Iced coffee')g=glass(c,{ice:1,cream:/iced coffee/i.test(n)});
+ else if(cat==='Frappes & chillers')g=glass(c,{cream:/frappe/i.test(n),thick:1});
+ else if(cat==='Smoothies & iced tea')g=glass(c,{thick:/smoothie/i.test(n),ice:/tea/i.test(n)});
+ else if(cat==='Sodas & water')g=/water/i.test(n)?bottle():glass(c,{fizz:1,leaf:/mojito/i.test(n)});
+ else if(cat==='Sandwiches & wraps')g=/wrap/i.test(n)?wrap():sand();
+ else if(cat==='Turnovers')g=/lasagna/i.test(n)?lasa():pizza();
+ else g=/brownie/i.test(n)?brown():cake(c);
+ return `<svg viewBox='0 0 64 64' width='56' height='56' role='img' aria-label='${n}'>${g}</svg>`}
+const tabs=document.querySelector('.tabs'),list=document.getElementById('menuList');
+function show(cat){
+  [...tabs.children].forEach(b=>b.setAttribute('aria-selected',b.textContent===cat));
+  list.innerHTML=MENU[cat].map(([n,d,p,f])=>`<li><div class="thumb">${art(cat,n)}</div><div><b>${n}</b><span>${d}</span></div><div class="price">${f?'<small>from </small>':''}Rs. ${p.toLocaleString('en-US')}</div></li>`).join('');
+}
+Object.keys(MENU).forEach(c=>{const b=document.createElement('button');b.textContent=c;b.setAttribute('role','tab');b.onclick=()=>show(c);tabs.appendChild(b)});
+show('Espresso');
+
+
+
+// hours: [open, close] in 24h, index 0 = Sunday
+const H=[[9,24],[9,24],[9,24],[9,24],[9,24],[9,24],[9,24]];
+const D=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+const f=h=>{const x=h%24,s=x>=12?'pm':'am';return ((x+11)%12+1)+s};
+const now=new Date(),d=now.getDay(),t=now.getHours()+now.getMinutes()/60;
+document.getElementById('hours').innerHTML='<tr><th>Day</th><th>Opens</th><th>Closes</th></tr>'+D.map((n,i)=>`<tr class="${i===d?'today':''}"><td>${n}${i===d?' (today)':''}</td><td>${f(H[i][0])}</td><td>${f(H[i][1])}</td></tr>`).join('');
+const open=t>=H[d][0]&&t<H[d][1];
+document.getElementById('dot').classList.toggle('on',open);
+const nd=(d+1)%7;
+document.getElementById('statusText').textContent=open?`Open now, closes at ${f(H[d][1])}`:(t<H[d][0]?`Closed now, opens today at ${f(H[d][0])}`:`Closed now, opens ${D[nd]} at ${f(H[nd][0])}`);
+</script>
+</body>
+</html>
